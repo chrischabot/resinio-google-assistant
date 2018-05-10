@@ -1,12 +1,10 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-python:3-slim
+FROM resin/%%RESIN_MACHINE_NAME%%-python:3
 
 RUN apt-get update && apt-get install -yq \
     git alsa-utils python3-pip python3-numpy python3-pysocks python3-rpi.gpio python3-pysocks virtualenv libttspico-utils rsync ntpdate \
-    python3-dev python3-all libpython3-dev libexpat1-dev && \
-    apt-get clean
+    python3-dev python3-all libpython3-dev libexpat1-dev
 
 WORKDIR /usr/src/app
-COPY . ./
 
 RUN cd /usr/src/app && \
    git clone -b voicekit https://github.com/google/aiyprojects-raspbian.git assistant && \
@@ -15,6 +13,8 @@ RUN cd /usr/src/app && \
    ./scripts/install-services.sh && \
    ln -s src/assistant_library_with_local_commands_demo.py src/main.py && \
    systemctl enable voice-recognizer.service
+
+COPY . ./
 
 # RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
