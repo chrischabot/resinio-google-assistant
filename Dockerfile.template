@@ -13,8 +13,9 @@ RUN cd /usr/src/app && \
    ./scripts/install-deps.sh && \
    ./scripts/install-services.sh && \
    cd src && ln -s assistant_library_with_local_commands_demo.py main.py && cd .. && \
-   pip3 install -U six requests google.assistant.library google-assistant-grpc google-cloud-speech google-auth-oauthlib && \
-   apt-get remove `dpkg -l '*-dev'| grep "\-dev" | awk '{print $2}'` && apt-get clean
+   pip3 install -U six requests google-assistant-library google-assistant-grpc google-cloud-speech google-auth-oauthlib
+
+# apt-get remove `dpkg -l '*-dev'| grep "\-dev" | awk '{print $2}'` && apt-get clean
 
 # systemctl enable voice-recognizer.service
 
