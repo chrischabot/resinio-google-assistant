@@ -14,6 +14,9 @@ RUN cd /usr/src/app && \
    ./scripts/install-services.sh && \
    cd src && ln -s assistant_library_with_local_commands_demo.py main.py && cd ..
 
+RUN cd /usr/src/app/assistant && \
+   pip3 install -U six google-assistant-grpc google-cloud-speech google-auth-oauthlib google-assistant-library
+
 # pip3 install -U six requests google-assistant-grpc google-cloud-speech google-auth-oauthlib
 # apt-get remove `dpkg -l '*-dev'| grep "\-dev" | awk '{print $2}'` && apt-get clean
 
