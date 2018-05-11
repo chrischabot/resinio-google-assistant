@@ -10,6 +10,10 @@ if [ ! -f /root/.cache/voice-recognizer/assistant_credentials.json ] ; then
 fi
 
 cd /usr/src/app/assistant
+if [ ! -f pip_installed ] ; then
+	pip3 install -U six google-assistant-grpc google-cloud-speech google-auth-oauthlib google-aistant-library
+	touch pip_installed
+fi
 source env/bin/activate
 python3 src/main.py
 
