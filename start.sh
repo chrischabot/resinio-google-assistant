@@ -11,7 +11,7 @@ fi
 
 cd /usr/src/app/assistant
 if [ ! -f pip_installed ] ; then
-	pip3 install -U six google-assistant-grpc google-cloud-speech google-auth-oauthlib google-aistant-library
+	pip3 install -U six google-assistant-grpc google-cloud-speech google-auth-oauthlib google-assistant-library
 	touch pip_installed
 fi
 source env/bin/activate
