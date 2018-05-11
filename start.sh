@@ -1,7 +1,12 @@
 #!/bin/bash
 
-if [ ! -f assistant.json ] ; then
-	echo $AS > assistant.json
+if [ ! -f /root/assistant.json ] ; then
+	echo $AS > /root/assistant.json
+fi
+
+if [ ! -f /root/.cache/voice-recognizer/assistant_credentials.json ] ; then
+	mkdir -p /root/.cache/voice-recognizer/
+	echo $AC > /root/.cache/voice-recognizer/assistant_credentials.json
 fi
 
 cd /usr/src/app/assistant
