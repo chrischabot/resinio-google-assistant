@@ -18,31 +18,33 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 
 RUN cp `which uname` /bin/uname-orig && echo '#!/bin/bash\nif [[ $1 == "-m" ]]; then echo "armv7l"; else /bin/uname-orig $@; fi;' > `which uname`
 
-# Configure ALSA
-COPY Dockerbin/asound.conf /etc/asound.conf
-
 # Move to app dir
 WORKDIR /usr/src/app
-# Install systemd services
-COPY ./Dockerbin/alsa-init.service /lib/systemd/system/
-RUN systemctl enable alsa-init.service
 
-# Move app to filesystem
-COPY ./app ./
-COPY pip.conf /etc/pip.conf
-
+# Clone Google Assistant
 RUN git clone https://github.com/google/aiyprojects-raspbian.git && \
     mv aiyprojects-raspbian/src/* . && \
     rm -rf aiyprojects-raspbian
+
+# Configure PIP
+COPY pip.conf /etc/pip.conf
+
+# Move app to filesystem
+COPY ./app ./
 
 # Install Google Assistant library
 RUN pip3 install --upgrade -r requirements.txt && \
     echo "/usr/src/app" > /usr/lib/python3/dist-packages/aiy.pth && \
     echo "/usr/src/app" > /usr/local/lib/python3.5/dist-packages/aiy.pth
 
-# RUN bash -c "pip3 install --upgrade google-assistant-library"
+# Install systemd services
+COPY ./Dockerbin/alsa-init.service /lib/systemd/system/
+RUN systemctl enable alsa-init.service
 
-## Uncomment if you want systemd
+# Configure ALSA
+COPY Dockerbin/asound.conf /etc/asound.conf
+
+# Enable init system
 ENV INITSYSTEM on
 
 # Start app
