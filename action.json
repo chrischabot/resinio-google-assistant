@@ -1,0 +1,43 @@
+{
+   "manifest": {
+      "displayName": "Short Story",
+      "invocationName": "Short Story",
+      "category": "PRODUCTIVITY"
+   },
+   "actions": [{
+      "name": "printStory",
+      "intent": {
+         "name": "printStory",
+         "trigger": {
+            "queryPatterns": [
+               "give me a story",
+               "give me short story",
+               "show me a story",
+               "show me a short story"
+            ]
+         }
+      },
+      "availability": {
+         "deviceClasses": [{
+            "assistantSdkDevice": {}
+         }]
+      },
+      "fulfillment": {
+         "staticFulfillment": {
+            "templatedResponse": {
+               "items": [{
+                     "simpleResponse": {
+                        "textToSpeech": "Short work of fiction coming up"
+                     }
+                  },
+                  {
+                     "deviceExecution": {
+                        "command": "printStory"
+                     }
+                  }
+               ]
+            }
+         }
+      }
+   }]
+}

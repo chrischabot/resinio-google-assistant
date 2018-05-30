@@ -45,7 +45,7 @@ RUN systemctl enable alsa-init.service
 COPY Dockerbin/asound.conf /etc/asound.conf
 
 # Enable init system
-ENV INITSYSTEM on
+# ENV INITSYSTEM on
 
 # Start app
 CMD ["bash", "/usr/src/app/start.sh"]

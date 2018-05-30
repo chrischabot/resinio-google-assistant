@@ -23,6 +23,7 @@ if [ ! -f /root/.cache/voice-recognizer/assistant_credentials.json ] ; then
 fi
 
 # Start app
-python3 ./examples/voice/assistant_library_with_button_demo.py
+#python3 ./examples/voice/assistant_library_with_button_demo.py
+python3 assistant.py
 
 sleep 3600
